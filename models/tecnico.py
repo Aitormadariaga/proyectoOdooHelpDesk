@@ -1,5 +1,6 @@
 from odoo import models, fields
 
+
 class HelpdeskTecnico(models.Model):
     _name = 'helpdesk.tecnico'
     _description = 'Técnico de soporte'
@@ -13,4 +14,7 @@ class HelpdeskTecnico(models.Model):
     ], string='Nivel de soporte', default='1')
     especialidad = fields.Char(string='Especialidad')
     activo = fields.Boolean(string='Activo', default=True)
-    user_id = fields.Many2one('res.users', string='Usuario vinculado')  
+    user_id = fields.Many2one(
+        'res.users',
+        string='Usuario vinculado',
+        domain=[('share', '=', False)])

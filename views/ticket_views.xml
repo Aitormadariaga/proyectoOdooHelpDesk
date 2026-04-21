@@ -7,8 +7,8 @@
         <field name='model'>helpdesk.ticket</field>
         <field name='arch' type='xml'>
             <tree>
-                <field name='name'/>
                 <field name='codigo'/>
+                <field name='name'/>
                 <field name='cliente_id'/>
                 <field name='categoria_id'/>
                 <field name='tecnico_id'/>
@@ -26,28 +26,37 @@
         <field name='arch' type='xml'>
             <form>
                 <sheet>
+                    <div class="oe_title">
+                        <h1><field name='codigo' readonly="1"/></h1>
+                    </div>
                     <group>
                         <group string='Información del ticket'>
                             <field name='name'/>
-                            <field name='codigo'/>
                             <field name='categoria_id'/>
                             <field name='prioridad'/>
                             <field name='estado'/>
                         </group>
                         <group string='Asignación'>
                             <field name='cliente_id'/>
-                            <field name='contrato_id' domain="[('cliente_id', '=', cliente_id)]"/>
+                            <field name='contrato_id'
+                                   domain="[('cliente_id', '=', cliente_id)]"/>
                             <field name='tecnico_id'/>
                         </group>
                     </group>
                     <group string='Detalle'>
-                        <field name='descripcion'/>
+                        <field name='descripcion' nolabel="1"/>
                     </group>
                     <group string='Fechas'>
                         <field name='fecha_creacion'/>
                         <field name='fecha_cierre'/>
                     </group>
                 </sheet>
+                <!-- Chatter -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
             </form>
         </field>
     </record>

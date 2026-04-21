@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
 
-    <record id='helpdesk_cliente_view_list' model='ir.ui.view'>
-        <field name='name'>helpdesk.cliente.list</field>
+    <record id='helpdesk_cliente_view_tree' model='ir.ui.view'>
+        <field name='name'>helpdesk.cliente.tree</field>
         <field name='model'>helpdesk.cliente</field>
         <field name='arch' type='xml'>
             <tree>
@@ -25,6 +25,7 @@
                         <field name='email'/>
                         <field name='telefono'/>
                         <field name='activo'/>
+                        <field name='user_id'/>
                     </group>
                 </sheet>
             </form>

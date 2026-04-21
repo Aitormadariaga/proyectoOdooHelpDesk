@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
 
-    <record id='helpdesk_contrato_view_list' model='ir.ui.view'>
-        <field name='name'>helpdesk.contrato.list</field>
+    <record id='helpdesk_contrato_view_tree' model='ir.ui.view'>
+        <field name='name'>helpdesk.contrato.tree</field>
         <field name='model'>helpdesk.contrato</field>
         <field name='arch' type='xml'>
             <tree>
@@ -12,6 +12,7 @@
                 <field name='plan'/>
                 <field name='estado'/>
                 <field name='precio_mensual'/>
+                <field name='currency_id' invisible="1"/>
             </tree>
         </field>
     </record>
@@ -23,12 +24,17 @@
             <form>
                 <sheet>
                     <group>
-                        <field name='name'/>
-                        <field name='cliente_id'/>
-                        <field name='tipo_servicio'/>
-                        <field name='plan'/>
-                        <field name='estado'/>
-                        <field name='precio_mensual'/>
+                        <group>
+                            <field name='name'/>
+                            <field name='cliente_id'/>
+                            <field name='tipo_servicio'/>
+                            <field name='plan'/>
+                        </group>
+                        <group>
+                            <field name='estado'/>
+                            <field name='precio_mensual'/>
+                            <field name='currency_id' invisible="1"/>
+                        </group>
                     </group>
                 </sheet>
             </form>

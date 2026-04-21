@@ -2,8 +2,8 @@
 <odoo>
 
     <!-- VISTA LISTA -->
-    <record id='helpdesk_categoria_view_list' model='ir.ui.view'>
-        <field name='name'>helpdesk.categoria.list</field>
+    <record id='helpdesk_categoria_view_tree' model='ir.ui.view'>
+        <field name='name'>helpdesk.categoria.tree</field>
         <field name='model'>helpdesk.categoria</field>
         <field name='arch' type='xml'>
             <tree>
@@ -31,7 +31,7 @@
 
     <!-- ACCION -->
     <record id='helpdesk_categoria_action' model='ir.actions.act_window'>
-        <field name='name'>Categorias</field>
+        <field name='name'>Categorías</field>
         <field name='res_model'>helpdesk.categoria</field>
         <field name='view_mode'>tree,form</field>
     </record>
@@ -42,12 +42,12 @@
               sequence='10'/>
 
     <menuitem id='helpdesk_menu_config'
-              name='Configuracion'
+              name='Configuración'
               parent='helpdesk_menu_root'
               sequence='90'/>
 
     <menuitem id='helpdesk_menu_categoria'
-              name='Categorias'
+              name='Categorías'
               parent='helpdesk_menu_config'
               action='helpdesk_categoria_action'
               sequence='10'/>

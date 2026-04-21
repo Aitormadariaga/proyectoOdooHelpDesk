@@ -1,22 +1,46 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <odoo>
 
+    <!-- ============== TICKETS ============== -->
     <record id="rule_ticket_tecnico" model="ir.rule">
-    <field name="name">Ticket: técnico ve sus tickets</field>
-    <field name="model_id" ref="model_helpdesk_ticket"/>
-    <field name="groups" eval="[(4, ref('helpdesk_telco.group_tecnico'))]"/>
-    <field name="domain_force">['|', ('tecnico_id', '=', False), ('tecnico_id.user_id', '=', user.id)]</field>
-    <field name="perm_read" eval="True"/>
-    <field name="perm_write" eval="True"/>
-    <field name="perm_create" eval="False"/>
-    <field name="perm_unlink" eval="False"/>
-</record>
+        <field name="name">Ticket: técnico ve sus tickets y los no asignados</field>
+        <field name="model_id" ref="model_helpdesk_ticket"/>
+        <field name="groups" eval="[(4, ref('helpdesk_telco.group_tecnico'))]"/>
+        <field name="domain_force">['|', ('tecnico_id', '=', False), ('tecnico_id.user_id', '=', user.id)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
 
     <record id="rule_ticket_cliente" model="ir.rule">
         <field name="name">Ticket: cliente ve sus tickets</field>
         <field name="model_id" ref="model_helpdesk_ticket"/>
         <field name="groups" eval="[(4, ref('helpdesk_telco.group_cliente'))]"/>
         <field name="domain_force">[('cliente_id.user_id', '=', user.id)]</field>
+    </record>
+
+    <!-- ============== CONTRATOS ============== -->
+    <record id="rule_contrato_cliente" model="ir.rule">
+        <field name="name">Contrato: cliente ve solo los suyos</field>
+        <field name="model_id" ref="model_helpdesk_contrato"/>
+        <field name="groups" eval="[(4, ref('helpdesk_telco.group_cliente'))]"/>
+        <field name="domain_force">[('cliente_id.user_id', '=', user.id)]</field>
+    </record>
+
+    <record id="rule_contrato_tecnico" model="ir.rule">
+        <field name="name">Contrato: técnico ve contratos de tickets que gestiona</field>
+        <field name="model_id" ref="model_helpdesk_contrato"/>
+        <field name="groups" eval="[(4, ref('helpdesk_telco.group_tecnico'))]"/>
+        <field name="domain_force">[('cliente_id', 'in', user.env['helpdesk.ticket'].search([('tecnico_id.user_id', '=', user.id)]).mapped('cliente_id').ids)]</field>
+    </record>
+
+    <!-- ============== CLIENTES ============== -->
+    <record id="rule_cliente_portal" model="ir.rule">
+        <field name="name">Cliente: solo ve su propia ficha</field>
+        <field name="model_id" ref="model_helpdesk_cliente"/>
+        <field name="groups" eval="[(4, ref('helpdesk_telco.group_cliente'))]"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
     </record>
 
 </odoo>
