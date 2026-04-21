@@ -33,8 +33,10 @@ class HelpdeskTicket(models.Model):
     ], string='Estado', default='abierto', tracking=True)
 
     fecha_creacion = fields.Datetime(
-        string='Fecha creación', default=fields.Datetime.now, readonly=True)
-    fecha_cierre = fields.Datetime(string='Fecha cierre', readonly=True)
+        string='Fecha creación', default=fields.Datetime.now,
+        readonly=True, copy=False)
+    fecha_cierre = fields.Datetime(
+        string='Fecha cierre', readonly=True, copy=False)
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -45,12 +47,27 @@ class HelpdeskTicket(models.Model):
         return super().create(vals_list)
 
     def write(self, vals):
-        # Al pasar a resuelto o cerrado, sellamos la fecha de cierre
-        if vals.get('estado') in ('resuelto', 'cerrado'):
-            for ticket in self:
-                if not ticket.fecha_cierre:
-                    vals.setdefault('fecha_cierre', fields.Datetime.now())
-        # Si se reabre, limpiamos la fecha de cierre
-        if vals.get('estado') in ('abierto', 'en_proceso'):
+        nuevo_estado = vals.get('estado')
+
+        # Si se reabre, limpiar fecha_cierre para todos: vale un solo write
+        if nuevo_estado in ('abierto', 'en_proceso'):
             vals['fecha_cierre'] = False
+            return super().write(vals)
+
+        # Si se cierra/resuelve y el usuario NO ha pasado fecha_cierre explícita,
+        # sellamos por registro para respetar los que ya la tenían.
+        if nuevo_estado in ('resuelto', 'cerrado') and 'fecha_cierre' not in vals:
+            ahora = fields.Datetime.now()
+            # Separar los que aún no tienen fecha_cierre
+            sin_fecha = self.filtered(lambda t: not t.fecha_cierre)
+            con_fecha = self - sin_fecha
+
+            res = True
+            if con_fecha:
+                res = super(HelpdeskTicket, con_fecha).write(vals) and res
+            if sin_fecha:
+                vals_sellado = dict(vals, fecha_cierre=ahora)
+                res = super(HelpdeskTicket, sin_fecha).write(vals_sellado) and res
+            return res
+
         return super().write(vals)

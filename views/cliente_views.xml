@@ -9,7 +9,7 @@
                 <field name='name'/>
                 <field name='email'/>
                 <field name='telefono'/>
-                <field name='activo'/>
+                <field name='active'/>
             </tree>
         </field>
     </record>
@@ -24,7 +24,7 @@
                         <field name='name'/>
                         <field name='email'/>
                         <field name='telefono'/>
-                        <field name='activo'/>
+                        <field name='active'/>
                         <field name='user_id'/>
                     </group>
                 </sheet>

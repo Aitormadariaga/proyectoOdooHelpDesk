@@ -13,7 +13,9 @@ class HelpdeskTecnico(models.Model):
         ('3', 'Nivel 3'),
     ], string='Nivel de soporte', default='1')
     especialidad = fields.Char(string='Especialidad')
-    activo = fields.Boolean(string='Activo', default=True)
+    # 'active' es un campo reservado de Odoo: activa archivado,
+    # filtro automático en búsquedas y botón de archivar en la UI.
+    active = fields.Boolean(string='Activo', default=True)
     user_id = fields.Many2one(
         'res.users',
         string='Usuario vinculado',

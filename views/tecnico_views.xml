@@ -10,7 +10,7 @@
                 <field name='email'/>
                 <field name='nivel_soporte'/>
                 <field name='especialidad'/>
-                <field name='activo'/>
+                <field name='active'/>
             </tree>
         </field>
     </record>
@@ -26,7 +26,7 @@
                         <field name='email'/>
                         <field name='nivel_soporte'/>
                         <field name='especialidad'/>
-                        <field name='activo'/>
+                        <field name='active'/>
                         <field name='user_id'/>
                     </group>
                 </sheet>
