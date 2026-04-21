@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id="helpdesk_telco_category" model="ir.module.category">
+        <field name="name">Helpdesk Telco</field>
+    </record>
+
+    <record id="group_admin" model="res.groups">
+        <field name="name">Administrador</field>
+        <field name="category_id" ref="helpdesk_telco_category"/>
+    </record>
+
+    <record id="group_tecnico" model="res.groups">
+        <field name="name">Técnico</field>
+        <field name="category_id" ref="helpdesk_telco_category"/>
+    </record>
+
+    <record id="group_cliente" model="res.groups">
+        <field name="name">Cliente</field>
+        <field name="category_id" ref="helpdesk_telco_category"/>
+    </record>
+
+</odoo>

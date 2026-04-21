@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <!-- VISTA LISTA -->
+    <record id='helpdesk_ticket_view_tree' model='ir.ui.view'>
+        <field name='name'>helpdesk.ticket.tree</field>
+        <field name='model'>helpdesk.ticket</field>
+        <field name='arch' type='xml'>
+            <tree>
+                <field name='name'/>
+                <field name='codigo'/>
+                <field name='cliente_id'/>
+                <field name='categoria_id'/>
+                <field name='tecnico_id'/>
+                <field name='prioridad'/>
+                <field name='estado'/>
+                <field name='fecha_creacion'/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- VISTA FORMULARIO -->
+    <record id='helpdesk_ticket_view_form' model='ir.ui.view'>
+        <field name='name'>helpdesk.ticket.form</field>
+        <field name='model'>helpdesk.ticket</field>
+        <field name='arch' type='xml'>
+            <form>
+                <sheet>
+                    <group>
+                        <group string='Información del ticket'>
+                            <field name='name'/>
+                            <field name='codigo'/>
+                            <field name='categoria_id'/>
+                            <field name='prioridad'/>
+                            <field name='estado'/>
+                        </group>
+                        <group string='Asignación'>
+                            <field name='cliente_id'/>
+                            <field name='contrato_id' domain="[('cliente_id', '=', cliente_id)]"/>
+                            <field name='tecnico_id'/>
+                        </group>
+                    </group>
+                    <group string='Detalle'>
+                        <field name='descripcion'/>
+                    </group>
+                    <group string='Fechas'>
+                        <field name='fecha_creacion'/>
+                        <field name='fecha_cierre'/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ACCION -->
+    <record id='helpdesk_ticket_action' model='ir.actions.act_window'>
+        <field name='name'>Tickets</field>
+        <field name='res_model'>helpdesk.ticket</field>
+        <field name='view_mode'>tree,form</field>
+    </record>
+
+    <!-- MENU: Tickets bajo Helpdesk -->
+    <menuitem id='helpdesk_menu_tickets'
+              name='Tickets'
+              parent='helpdesk_menu_root'
+              action='helpdesk_ticket_action'
+              sequence='10'/>
+
+</odoo>

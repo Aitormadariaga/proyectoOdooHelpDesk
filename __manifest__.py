@@ -1,0 +1,23 @@
+{
+    'name': 'Helpdesk Telco',
+    'version': '17.0.1.0.0',
+    'summary': 'Sistema de tickets para compañía telefónica',
+    'description': 'Módulo de helpdesk con portal de cliente y panel técnico',
+    'author': 'A. Madariaga',
+    'category': 'Services',
+    'depends': ['base', 'mail'],
+    'data': [
+        'security/groups.xml',
+        'security/ir.model.access.csv',
+        'security/record_rules.xml',
+        'data/sequence.xml',
+        'views/categoria_views.xml',
+        'views/ticket_views.xml',
+        'views/cliente_views.xml',
+        'views/tecnico_views.xml',
+        'views/contrato_views.xml',
+    ],
+    'installable': True,
+    'application': True,
+    'license': 'LGPL-3',
+}

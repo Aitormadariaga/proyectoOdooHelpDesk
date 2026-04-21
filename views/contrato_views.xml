@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id='helpdesk_contrato_view_list' model='ir.ui.view'>
+        <field name='name'>helpdesk.contrato.list</field>
+        <field name='model'>helpdesk.contrato</field>
+        <field name='arch' type='xml'>
+            <tree>
+                <field name='name'/>
+                <field name='cliente_id'/>
+                <field name='tipo_servicio'/>
+                <field name='plan'/>
+                <field name='estado'/>
+                <field name='precio_mensual'/>
+            </tree>
+        </field>
+    </record>
+
+    <record id='helpdesk_contrato_view_form' model='ir.ui.view'>
+        <field name='name'>helpdesk.contrato.form</field>
+        <field name='model'>helpdesk.contrato</field>
+        <field name='arch' type='xml'>
+            <form>
+                <sheet>
+                    <group>
+                        <field name='name'/>
+                        <field name='cliente_id'/>
+                        <field name='tipo_servicio'/>
+                        <field name='plan'/>
+                        <field name='estado'/>
+                        <field name='precio_mensual'/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id='helpdesk_contrato_action' model='ir.actions.act_window'>
+        <field name='name'>Contratos</field>
+        <field name='res_model'>helpdesk.contrato</field>
+        <field name='view_mode'>tree,form</field>
+    </record>
+
+    <menuitem id='helpdesk_menu_contrato'
+              name='Contratos'
+              parent='helpdesk_menu_config'
+              action='helpdesk_contrato_action'
+              sequence='40'/>
+
+</odoo>

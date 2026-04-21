@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+    <record id='helpdesk_cliente_view_list' model='ir.ui.view'>
+        <field name='name'>helpdesk.cliente.list</field>
+        <field name='model'>helpdesk.cliente</field>
+        <field name='arch' type='xml'>
+            <tree>
+                <field name='name'/>
+                <field name='email'/>
+                <field name='telefono'/>
+                <field name='activo'/>
+            </tree>
+        </field>
+    </record>
+
+    <record id='helpdesk_cliente_view_form' model='ir.ui.view'>
+        <field name='name'>helpdesk.cliente.form</field>
+        <field name='model'>helpdesk.cliente</field>
+        <field name='arch' type='xml'>
+            <form>
+                <sheet>
+                    <group>
+                        <field name='name'/>
+                        <field name='email'/>
+                        <field name='telefono'/>
+                        <field name='activo'/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id='helpdesk_cliente_action' model='ir.actions.act_window'>
+        <field name='name'>Clientes</field>
+        <field name='res_model'>helpdesk.cliente</field>
+        <field name='view_mode'>tree,form</field>
+    </record>
+
+    <menuitem id='helpdesk_menu_cliente'
+              name='Clientes'
+              parent='helpdesk_menu_config'
+              action='helpdesk_cliente_action'
+              sequence='20'/>
+
+</odoo>
